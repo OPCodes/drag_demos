@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border: 1px dashed #000;
+            background: rgba(0,0,255,.5);
+        }
+    </style>
+    <script>
+        window.onload = function (){
+
+            document.onmousedown = function (ev){
+
+                var disX = ev.clientX;
+                var disY = ev.clientY;
+                var newDiv = document.createElement("div");
+
+                document.onmousemove = function (ev){
+                    
+                    newDiv.id = "box";
+                    newDiv.style.width = Math.abs(ev.clientX - disX) + "px";
+                    newDiv.style.height = Math.abs(ev.clientY - disY) + "px";
+                    newDiv.style.left = Math.min(ev.clientX,disX) + "px";
+                    newDiv.style.top = Math.min(ev.clientY,disY) + "px";
+                    document.body.appendChild(newDiv);
+                }
+
+                document.onmouseup = function (ev){
+                    document.body.removeChild(newDiv);
+                    document.onmousemove = document.onmouseup = null;
+                }
+            }    
+        }
+    </script>
+</head>
+<body></body>
+</html>
+    
